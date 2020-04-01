@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>VOTING ELIGIBILITY STATUS</h1>
+    <hr style="border: 1px dashed black;">
+    <h3 id="name"></h3> <br>
+    <h3 id="age"></h3> <br>
+    <h3 id="votingEligibility"></h3>
+    <button onclick="window.location = ''">Do Another Calculation</button>
+
+    <script>
+        var name = prompt("Enter your name here: ")
+        var dob = prompt("Enter date of birth in dd/mm/yyyy format: ");
+
+        //extract year, month and day of birth separately
+
+        var yearOfBirth = dob.slice(6);
+        var monthOfBirth = dob.slice(3, 5) - 1; // -1 because JS index starts from 0 so current month's index will be 1 less than MOB supplied
+        var dayOfBirth = dob.slice(0, 2);
+        var today = new Date();    //get current date
+        var age = today.getFullYear() - yearOfBirth;
+        
+        /*if present month is less than MOB or if present month is the same as MOB but present day is less than DOB, minus 1 from age*/
+        if (today.getMonth() < monthOfBirth || (today.getMonth() == monthOfBirth && today.getDate() < dayOfBirth)){
+            age--;
+        }
+
+        document.getElementById("name").innerHTML ="Name: " + name;
+        document.getElementById("age").innerHTML = "Age:"+ age;
+
+        if (age >= 18){
+            document.getElementById("votingEligibility").innerHTML = "You are above 18, so you are eligible to vote.";
+        }
+        else{
+            document.getElementById("votingEligibility").innerHTML = "You are below 18, so you are not eligible to vote.";
+        }
+    </script>
+</body>
+</html>
